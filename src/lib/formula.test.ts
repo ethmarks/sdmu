@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { percentileToMult } from "./formula";
+import { multToPercentile, percentileToMult } from "./formula";
 
 interface Answers {
 	0: number;
@@ -54,13 +54,22 @@ describe("Formula", () => {
 	describe.each<TestCase>(tests)(
 		"$name",
 		({ name, answers, modifier, minMult, maxMult }) => {
-			const formula = (percentile: number) =>
-				percentileToMult(percentile, modifier, minMult, maxMult);
+			const cases = Object.entries(answers);
 
-			it.each(Object.entries(answers))(
-				"%dth percentile should be %dx",
-				(percentile, mult) => {
-					expect(formula(Number(percentile))).toBeCloseTo(mult);
+			// applying the formula forwards, from percentile -> mult
+			const forwards = (percentile: number) =>
+				percentileToMult(percentile, modifier, minMult, maxMult);
+			it.each(cases)("%dth percentile should be %dx", (percentile, mult) => {
+				expect(forwards(Number(percentile))).toBeCloseTo(mult, 0.1);
+			});
+
+			// applying the formula backwards, from mult -> percentile
+			const backwards = (mult: number) =>
+				multToPercentile(mult, modifier, minMult, maxMult);
+			it.each(cases.map(([p, m]) => [m, p]))(
+				"%dx mult should be %dth percentile",
+				(mult, percentile) => {
+					expect(backwards(mult)).toBeCloseTo(Number(percentile), 0.1);
 				},
 			);
 		},
