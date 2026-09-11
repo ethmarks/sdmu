@@ -1,6 +1,7 @@
 import adapter from "@sveltejs/adapter-static";
 import { sveltekit } from "@sveltejs/kit/vite";
 import { defineConfig } from "vite";
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
 export default defineConfig({
 	plugins: [
@@ -17,10 +18,15 @@ export default defineConfig({
 					: (process.env.BASE_PATH as `/${string}`),
 			},
 			prerender: {
-				handleHttpError: ({ path, referrer, message }) => {
+				handleHttpError: ({
+					path: _path,
+					referrer: _referrer,
+					message: _message,
+				}) => {
 					return;
 				},
 			},
+			preprocess: [vitePreprocess()],
 		}),
 	],
 });

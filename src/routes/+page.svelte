@@ -25,7 +25,7 @@
 	></iframe>
 </section>
 
-<style>
+<style lang="scss">
 	#graph iframe {
 		display: block;
 		margin-inline: auto;
