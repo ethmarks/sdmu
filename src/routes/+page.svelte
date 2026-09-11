@@ -19,7 +19,7 @@
 	<iframe
 		title="Stardance Multiplier"
 		src="https://www.desmos.com/calculator/jhptzj9o1h?embed"
-		width="500"
+		width="100%"
 		height="500"
 		frameborder="0"
 	></iframe>
