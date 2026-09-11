@@ -5,7 +5,7 @@
 	> uses to calculate project multipliers.
 </p>
 
-<section id="desmos">
+<section id="graph">
 	<h2>Interactive Graph</h2>
 	<p>
 		Drag the point side-to-side to adjust the percentile, and it'll display
@@ -26,7 +26,7 @@
 </section>
 
 <style>
-	#desmos iframe {
+	#graph iframe {
 		display: block;
 		margin-inline: auto;
 		border-radius: 1em;
