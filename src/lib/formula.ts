@@ -38,12 +38,6 @@ export function percentileToMult(
 	return raw * modifier;
 }
 
-// change of base formula, because for some reason JS doesn't have a built-in
-// generic log function
-function genericLog(num: number, base: number): number {
-	return Math.log(num) / Math.log(base);
-}
-
 /**
  * Mathematical inverse of {@link percentileToMult}
  */
@@ -58,22 +52,23 @@ export function multToPercentile(
 
 	exponent = DEFAULT_MAGIC_EXPONENT,
 ): number {
-	if (mult > highestMult) {
-		throw new Error(
-			`input mult must be less than or equal to highest mult, but input mult was ${mult} and highest mult was ${highestMult}`,
-		);
-	}
-	if (mult < lowestMult) {
-		throw new Error(
-			`input mult must be greater than or equal to lowest mult, but input mult was ${mult} and lowest mult was ${lowestMult}`,
-		);
-	}
-
 	const raw = mult / modifier;
-	const deltaMult = highestMult - lowestMult;
-	const factor = raw / deltaMult - lowestMult;
 
-	const normalizedPercentile = genericLog(factor, exponent);
+	if (raw > highestMult) {
+		throw new Error(
+			`mult must be less than or equal to highest mult, but mult was ${raw} and highest mult was ${highestMult}`,
+		);
+	}
+	if (raw < lowestMult) {
+		throw new Error(
+			`mult must be greater than or equal to lowest mult, but mult was ${raw} and lowest mult was ${lowestMult}`,
+		);
+	}
+
+	const deltaMult = highestMult - lowestMult;
+	const factor = (raw - lowestMult) / deltaMult;
+
+	const normalizedPercentile = factor ** (1 / exponent);
 
 	return normalizedPercentile * 100;
 }
