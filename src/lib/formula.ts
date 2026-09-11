@@ -11,6 +11,9 @@ export function percentileToMult(
 	/** 0-100, NOT 0-1 */
 	percentile: number,
 
+	/** For blessed and cursed modifiers */
+	modifier: number = 1,
+
 	lowestMult = DEFAULT_LOWEST_MULT,
 	highestMult = DEFAULT_HIGHEST_MULT,
 
@@ -26,5 +29,7 @@ export function percentileToMult(
 
 	const deltaMult = highestMult - lowestMult;
 
-	return lowestMult + deltaMult * factor;
+	const raw = lowestMult + deltaMult * factor;
+
+	return raw * modifier;
 }
