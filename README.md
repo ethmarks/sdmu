@@ -28,6 +28,10 @@ Heavily inspired by
 Lightly inspired by [Stardance Stats](https://stardancestats.xyz/) made by
 [Mixid](https://github.com/MIXIDtheSilly/)
 
+- Thanks to [Hakan Alpay](https://github.com/Kimeiga) for making
+  [Bahunya](https://kimeiga.github.io/bahunya/), which is used as a base for the
+  site styles
+
 ## License
 
 This project is under an MIT License. See [LICENSE](LICENSE) for more
