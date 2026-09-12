@@ -15,6 +15,7 @@
 		<a href="#top">Home</a>
 		<a href="#graph">Graph</a>
 		<a href="#calc">Calculator</a>
+		<a href="#formula">Formula</a>
 		<a href="https://github.com/ethmarks/sdmu">Source</a>
 	</nav>
 </header>

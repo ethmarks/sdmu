@@ -62,7 +62,7 @@
 	<Calculator {mult} {percentile} {updateMult} {updatePercentile} />
 </section>
 
-<section id="math">
+<section id="formula">
 	<h2>Formula</h2>
 	<p>Steps to apply the formula.</p>
 	<FormulaSteps {mult} {percentile} />
