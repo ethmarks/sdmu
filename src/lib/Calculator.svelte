@@ -1,25 +1,12 @@
 <script lang="ts">
-	import { percentileToMult, multToPercentile } from "./formula";
-
-	const DECIMALS_FOR_PERCENTILE = 2;
-	const DECIMALS_FOR_MULT = 4;
-
-	let percentile: number = $state(50);
-	let mult: number = $state(6.67);
-
-	function updateMult() {
-		mult =
-			Math.round(percentileToMult(percentile) * 10 ** DECIMALS_FOR_MULT) /
-			10 ** DECIMALS_FOR_MULT;
+	interface Props {
+		percentile: number;
+		mult: number;
+		updatePercentile: (newPercentile: number) => void;
+		updateMult: (newMult: number) => void;
 	}
 
-	function updatePercentile() {
-		percentile =
-			Math.round(multToPercentile(mult) * 10 ** DECIMALS_FOR_PERCENTILE) /
-			10 ** DECIMALS_FOR_PERCENTILE;
-	}
-
-	updateMult();
+	let { percentile, mult, updatePercentile, updateMult }: Props = $props();
 </script>
 
 <div class="grid">
@@ -28,7 +15,7 @@
 			type="number"
 			id="percentile"
 			bind:value={percentile}
-			onchange={updateMult}
+			onchange={() => updatePercentile(percentile)}
 			min="0"
 			max="100"
 		/>
@@ -42,7 +29,7 @@
 			type="number"
 			id="mult"
 			bind:value={mult}
-			onchange={updatePercentile}
+			onchange={() => updateMult(mult)}
 			min="1"
 			max="20"
 			step="0.01"

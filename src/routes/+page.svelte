@@ -1,5 +1,28 @@
-<script>
+<script lang="ts">
 	import Calculator from "$lib/Calculator.svelte";
+	import { percentileToMult, multToPercentile } from "$lib/formula";
+
+	const DECIMALS_FOR_PERCENTILE = 2;
+	const DECIMALS_FOR_MULT = 4;
+
+	let percentile: number = $state(50);
+	let mult: number = $state(6.67);
+
+	function updatePercentile(newPercentile: number) {
+		percentile = newPercentile;
+		mult =
+			Math.round(percentileToMult(percentile) * 10 ** DECIMALS_FOR_MULT) /
+			10 ** DECIMALS_FOR_MULT;
+	}
+
+	function updateMult(newMult: number) {
+		mult = newMult;
+		percentile =
+			Math.round(multToPercentile(mult) * 10 ** DECIMALS_FOR_PERCENTILE) /
+			10 ** DECIMALS_FOR_PERCENTILE;
+	}
+
+	updatePercentile(50);
 </script>
 
 <h1>Stardance Mult Utility</h1>
@@ -35,7 +58,7 @@
 		Type a percentile to calculate the exact resulting multiplier, or type a
 		multiplier to calculate the exact required percentile.
 	</p>
-	<Calculator />
+	<Calculator {mult} {percentile} {updateMult} {updatePercentile} />
 </section>
 
 <style lang="scss">
