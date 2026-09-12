@@ -12,9 +12,7 @@
 	const multHigh = 20;
 	const exp = DEFAULT_MAGIC_EXPONENT;
 
-	function round(num: number): number {
-		const pad = 10000;
-
+	function round(num: number, pad: number = 10000): number {
 		return Math.round(num * pad) / pad;
 	}
 </script>
@@ -137,7 +135,7 @@
 				<mn>{multHigh - multLow}</mn>
 
 				<mo>(</mo>
-				<mn>{round(percentile / 100 ** exp)}</mn>
+				<mn>{round((percentile / 100) ** exp)}</mn>
 				<mo>)</mo>
 			</mtd>
 		</mtr>
@@ -180,11 +178,151 @@
 				>
 			</mtd>
 		</mtr>
+
+		<mspace height="2rem" />
+
+		<!-- defining the formula  -->
+		<mtr>
+			<mtd>
+				<mi>percentile</mi>
+			</mtd>
+
+			<mtd>
+				<mo>=</mo>
+			</mtd>
+
+			<mtd>
+				<mroot>
+					<mfrac>
+						<mrow>
+							<mo>(</mo>
+							<mi>mult</mi>
+							<mo>-</mo>
+							<msub>
+								<mi>m</mi>
+								<mi>low</mi>
+							</msub>
+							<mo>)</mo>
+						</mrow>
+
+						<mrow>
+							<mo>(</mo>
+
+							<msub>
+								<mi>m</mi>
+								<mi>high</mi>
+							</msub>
+							<mo>-</mo>
+
+							<msub>
+								<mi>m</mi>
+								<mi>low</mi>
+							</msub>
+							<mo>)</mo>
+						</mrow>
+					</mfrac>
+					<mi>exp</mi>
+				</mroot>
+			</mtd>
+		</mtr>
+
+		<!-- substituting stuff -->
+		<mtr>
+			<mtd></mtd>
+
+			<mtd>
+				<mo>=</mo>
+			</mtd>
+
+			<mtd>
+				<mroot>
+					<mfrac>
+						<mrow>
+							<mo>(</mo>
+							<mn>{mult}</mn>
+							<mo>-</mo>
+							<mn>{multLow}</mn>
+							<mo>)</mo>
+						</mrow>
+
+						<mrow>
+							<mo>(</mo>
+
+							<mn>{multHigh}</mn>
+							<mo>-</mo>
+
+							<mn>{multLow}</mn>
+							<mo>)</mo>
+						</mrow>
+					</mfrac>
+					<mi>{exp}</mi>
+				</mroot>
+			</mtd>
+		</mtr>
+
+		<!-- arithmetic -->
+		<mtr>
+			<mtd></mtd>
+
+			<mtd>
+				<mo>=</mo>
+			</mtd>
+
+			<mtd>
+				<mroot>
+					<mfrac>
+						<mn>{mult - multLow}</mn>
+						<mn>{multHigh - multLow}</mn>
+					</mfrac>
+					<mi>{exp}</mi>
+				</mroot>
+			</mtd>
+		</mtr>
+
+		<!-- again arithmetic -->
+		<mtr>
+			<mtd></mtd>
+
+			<mtd>
+				<mo>=</mo>
+			</mtd>
+
+			<mtd>
+				<mroot>
+					<mn>{round((mult - multLow) / (multHigh - multLow))}</mn>
+					<mi>{exp}</mi>
+				</mroot>
+			</mtd>
+		</mtr>
+
+		<!-- answer! That was pretty easy -->
+		<mtr>
+			<mtd></mtd>
+
+			<mtd>
+				<mo>=</mo>
+			</mtd>
+
+			<mtd>
+				<mn
+					>{round(
+						((mult - multLow) / (multHigh - multLow)) ** (1 / exp) *
+							100,
+						100,
+					)}%</mn
+				>
+			</mtd>
+		</mtr>
 	</mtable>
 </math>
 
 <style>
 	math {
 		font-size: 1.5em;
+	}
+
+	/* to justify it and make it look nice */
+	mtd:last-child {
+		text-align: left;
 	}
 </style>
