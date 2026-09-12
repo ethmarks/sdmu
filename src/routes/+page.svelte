@@ -65,7 +65,9 @@
 <section id="formula">
 	<h2>Formula</h2>
 	<p>Steps to apply the formula.</p>
-	<FormulaSteps {mult} {percentile} />
+	<div>
+		<FormulaSteps {mult} {percentile} />
+	</div>
 </section>
 
 <style lang="scss">
@@ -74,5 +76,11 @@
 		margin-inline: auto;
 		border-radius: 1em;
 		background: white;
+	}
+
+	#formula div {
+		max-width: 100%;
+		overflow-x: auto;
+		padding-block: 0.5rem;
 	}
 </style>
