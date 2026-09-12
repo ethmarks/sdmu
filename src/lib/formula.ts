@@ -5,7 +5,7 @@ const DEFAULT_HIGHEST_MULT = 20;
  * I have no idea where this came from. It's just hardcoded into the formula on
  * line 452 of payouts.rb
  */
-const DEFAULT_MAGIC_EXPONENT = 1.745427173;
+export const DEFAULT_MAGIC_EXPONENT = 1.745427173;
 
 /**
  * Based on `dollars_per_hour_for_percentile` in payouts.rb

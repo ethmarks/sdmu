@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Calculator from "$lib/Calculator.svelte";
 	import { percentileToMult, multToPercentile } from "$lib/formula";
+	import FormulaSteps from "$lib/FormulaSteps.svelte";
 
 	const DECIMALS_FOR_PERCENTILE = 2;
 	const DECIMALS_FOR_MULT = 4;
@@ -59,6 +60,12 @@
 		multiplier to calculate the exact required percentile.
 	</p>
 	<Calculator {mult} {percentile} {updateMult} {updatePercentile} />
+</section>
+
+<section id="math">
+	<h2>Formula</h2>
+	<p>Steps to apply the formula.</p>
+	<FormulaSteps {mult} {percentile} />
 </section>
 
 <style lang="scss">
