@@ -85,7 +85,7 @@
 				<msup>
 					<mrow>
 						<mo>(</mo>
-						<mn>{percentile}%</mn>
+						<mn><mark>{percentile}%</mark></mn>
 						<mo>)</mo>
 					</mrow>
 					<mo>{exp}</mo>
@@ -111,7 +111,7 @@
 				<msup>
 					<mrow>
 						<mo>(</mo>
-						<mn>{percentile}%</mn>
+						<mn><mark>{percentile}%</mark></mn>
 						<mo>)</mo>
 					</mrow>
 					<mo>{exp}</mo>
@@ -135,7 +135,7 @@
 				<mn>{multMax - multMin}</mn>
 
 				<mo>(</mo>
-				<mn>{round((percentile / 100) ** exp)}</mn>
+				<mn><mark>{round((percentile / 100) ** exp)}</mark></mn>
 				<mo>)</mo>
 			</mtd>
 		</mtr>
@@ -153,7 +153,12 @@
 
 				<mo>+</mo>
 
-				<mn>{round((multMax - multMin) * (percentile / 100) ** exp)}</mn
+				<mn
+					><mark
+						>{round(
+							(multMax - multMin) * (percentile / 100) ** exp,
+						)}</mark
+					></mn
 				>
 			</mtd>
 		</mtr>
@@ -168,10 +173,12 @@
 
 			<mtd>
 				<mn
-					>{round(
-						multMin +
-							(multMax - multMin) * (percentile / 100) ** exp,
-					)}</mn
+					><mark
+						>{round(
+							multMin +
+								(multMax - multMin) * (percentile / 100) ** exp,
+						)}</mark
+					></mn
 				>
 			</mtd>
 		</mtr>
@@ -236,7 +243,7 @@
 					<mfrac>
 						<mrow>
 							<mo>(</mo>
-							<mn>{mult}</mn>
+							<mn><mark>{mult}</mark></mn>
 							<mo>-</mo>
 							<mn>{multMin}</mn>
 							<mo>)</mo>
@@ -268,7 +275,7 @@
 			<mtd>
 				<mroot>
 					<mfrac>
-						<mn>{mult - multMin}</mn>
+						<mn><mark>{mult - multMin}</mark></mn>
 						<mn>{multMax - multMin}</mn>
 					</mfrac>
 					<mi>{exp}</mi>
@@ -286,7 +293,13 @@
 
 			<mtd>
 				<mroot>
-					<mn>{round((mult - multMin) / (multMax - multMin))}</mn>
+					<mn
+						><mark
+							>{round(
+								(mult - multMin) / (multMax - multMin),
+							)}</mark
+						></mn
+					>
 					<mi>{exp}</mi>
 				</mroot>
 			</mtd>
@@ -302,11 +315,14 @@
 
 			<mtd>
 				<mn
-					>{round(
-						((mult - multMin) / (multMax - multMin)) ** (1 / exp) *
+					><mark
+						>{round(
+							((mult - multMin) / (multMax - multMin)) **
+								(1 / exp) *
+								100,
 							100,
-						100,
-					)}%</mn
+						)}%</mark
+					></mn
 				>
 			</mtd>
 		</mtr>
