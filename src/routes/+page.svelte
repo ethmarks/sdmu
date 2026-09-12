@@ -1,3 +1,7 @@
+<script>
+	import Calculator from "$lib/Calculator.svelte";
+</script>
+
 <h1>Stardance Mult Utility</h1>
 <p>
 	Tools to visualize and explore the formula that <a
@@ -23,6 +27,15 @@
 		height="500"
 		frameborder="0"
 	></iframe>
+</section>
+
+<section id="calc">
+	<h2>Calculator</h2>
+	<p>
+		Type a percentile to calculate the exact resulting multiplier, or type a
+		multiplier to calculate the exact required percentile.
+	</p>
+	<Calculator />
 </section>
 
 <style lang="scss">
