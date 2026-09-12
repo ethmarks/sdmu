@@ -1,5 +1,5 @@
-const DEFAULT_LOWEST_MULT = 1;
-const DEFAULT_HIGHEST_MULT = 20;
+const DEFAULT_MIN_MULT = 1;
+const DEFAULT_MAX_MULT = 20;
 
 /**
  * I have no idea where this came from. It's just hardcoded into the formula on
@@ -17,8 +17,8 @@ export function percentileToMult(
 	/** For blessed and cursed modifiers */
 	modifier: number = 1,
 
-	lowestMult = DEFAULT_LOWEST_MULT,
-	highestMult = DEFAULT_HIGHEST_MULT,
+	minMult = DEFAULT_MIN_MULT,
+	maxMult = DEFAULT_MAX_MULT,
 
 	exponent = DEFAULT_MAGIC_EXPONENT,
 ): number {
@@ -31,9 +31,9 @@ export function percentileToMult(
 	const normalizedPercentile = percentile / 100;
 	const factor = normalizedPercentile ** exponent;
 
-	const deltaMult = highestMult - lowestMult;
+	const deltaMult = maxMult - minMult;
 
-	const raw = lowestMult + deltaMult * factor;
+	const raw = minMult + deltaMult * factor;
 
 	return raw * modifier;
 }
@@ -47,26 +47,26 @@ export function multToPercentile(
 	/** For blessed and cursed modifiers */
 	modifier: number = 1,
 
-	lowestMult = DEFAULT_LOWEST_MULT,
-	highestMult = DEFAULT_HIGHEST_MULT,
+	minMult = DEFAULT_MIN_MULT,
+	maxMult = DEFAULT_MAX_MULT,
 
 	exponent = DEFAULT_MAGIC_EXPONENT,
 ): number {
 	const raw = mult / modifier;
 
-	if (raw > highestMult) {
+	if (raw > maxMult) {
 		throw new Error(
-			`mult must be less than or equal to highest mult, but mult was ${raw} and highest mult was ${highestMult}`,
+			`mult must be less than or equal to max mult, but mult was ${raw} and max mult was ${maxMult}`,
 		);
 	}
-	if (raw < lowestMult) {
+	if (raw < minMult) {
 		throw new Error(
-			`mult must be greater than or equal to lowest mult, but mult was ${raw} and lowest mult was ${lowestMult}`,
+			`mult must be greater than or equal to min mult, but mult was ${raw} and min mult was ${minMult}`,
 		);
 	}
 
-	const deltaMult = highestMult - lowestMult;
-	const factor = (raw - lowestMult) / deltaMult;
+	const deltaMult = maxMult - minMult;
+	const factor = (raw - minMult) / deltaMult;
 
 	const normalizedPercentile = factor ** (1 / exponent);
 

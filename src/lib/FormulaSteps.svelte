@@ -8,8 +8,8 @@
 
 	let { percentile, mult }: Props = $props();
 
-	const multLow = 1;
-	const multHigh = 20;
+	const multMin = 1;
+	const multMax = 20;
 	const exp = DEFAULT_MAGIC_EXPONENT;
 
 	function round(num: number, pad: number = 10000): number {
@@ -32,7 +32,7 @@
 			<mtd>
 				<msub>
 					<mi>m</mi>
-					<mi>low</mi>
+					<mi>min</mi>
 				</msub>
 				<mo>+</mo>
 
@@ -40,13 +40,13 @@
 
 				<msub>
 					<mi>m</mi>
-					<mi>high</mi>
+					<mi>max</mi>
 				</msub>
 				<mo>-</mo>
 
 				<msub>
 					<mi>m</mi>
-					<mi>low</mi>
+					<mi>min</mi>
 				</msub>
 				<mo>)</mo>
 
@@ -70,16 +70,16 @@
 			</mtd>
 
 			<mtd>
-				<mn>{multLow}</mn>
+				<mn>{multMin}</mn>
 
 				<mo>+</mo>
 
 				<mo>(</mo>
 
-				<mn>{multHigh}</mn>
+				<mn>{multMax}</mn>
 				<mo>-</mo>
 
-				<mn>{multLow}</mn>
+				<mn>{multMin}</mn>
 				<mo>)</mo>
 
 				<msup>
@@ -102,11 +102,11 @@
 			</mtd>
 
 			<mtd>
-				<mn>{multLow}</mn>
+				<mn>{multMin}</mn>
 
 				<mo>+</mo>
 
-				<mn>{multHigh - multLow}</mn>
+				<mn>{multMax - multMin}</mn>
 
 				<msup>
 					<mrow>
@@ -128,11 +128,11 @@
 			</mtd>
 
 			<mtd>
-				<mn>{multLow}</mn>
+				<mn>{multMin}</mn>
 
 				<mo>+</mo>
 
-				<mn>{multHigh - multLow}</mn>
+				<mn>{multMax - multMin}</mn>
 
 				<mo>(</mo>
 				<mn>{round((percentile / 100) ** exp)}</mn>
@@ -149,14 +149,11 @@
 			</mtd>
 
 			<mtd>
-				<mn>{multLow}</mn>
+				<mn>{multMin}</mn>
 
 				<mo>+</mo>
 
-				<mn
-					>{round(
-						(multHigh - multLow) * (percentile / 100) ** exp,
-					)}</mn
+				<mn>{round((multMax - multMin) * (percentile / 100) ** exp)}</mn
 				>
 			</mtd>
 		</mtr>
@@ -172,8 +169,8 @@
 			<mtd>
 				<mn
 					>{round(
-						multLow +
-							(multHigh - multLow) * (percentile / 100) ** exp,
+						multMin +
+							(multMax - multMin) * (percentile / 100) ** exp,
 					)}</mn
 				>
 			</mtd>
@@ -200,7 +197,7 @@
 							<mo>-</mo>
 							<msub>
 								<mi>m</mi>
-								<mi>low</mi>
+								<mi>min</mi>
 							</msub>
 							<mo>)</mo>
 						</mrow>
@@ -210,13 +207,13 @@
 
 							<msub>
 								<mi>m</mi>
-								<mi>high</mi>
+								<mi>max</mi>
 							</msub>
 							<mo>-</mo>
 
 							<msub>
 								<mi>m</mi>
-								<mi>low</mi>
+								<mi>min</mi>
 							</msub>
 							<mo>)</mo>
 						</mrow>
@@ -241,17 +238,17 @@
 							<mo>(</mo>
 							<mn>{mult}</mn>
 							<mo>-</mo>
-							<mn>{multLow}</mn>
+							<mn>{multMin}</mn>
 							<mo>)</mo>
 						</mrow>
 
 						<mrow>
 							<mo>(</mo>
 
-							<mn>{multHigh}</mn>
+							<mn>{multMax}</mn>
 							<mo>-</mo>
 
-							<mn>{multLow}</mn>
+							<mn>{multMin}</mn>
 							<mo>)</mo>
 						</mrow>
 					</mfrac>
@@ -271,8 +268,8 @@
 			<mtd>
 				<mroot>
 					<mfrac>
-						<mn>{mult - multLow}</mn>
-						<mn>{multHigh - multLow}</mn>
+						<mn>{mult - multMin}</mn>
+						<mn>{multMax - multMin}</mn>
 					</mfrac>
 					<mi>{exp}</mi>
 				</mroot>
@@ -289,7 +286,7 @@
 
 			<mtd>
 				<mroot>
-					<mn>{round((mult - multLow) / (multHigh - multLow))}</mn>
+					<mn>{round((mult - multMin) / (multMax - multMin))}</mn>
 					<mi>{exp}</mi>
 				</mroot>
 			</mtd>
@@ -306,7 +303,7 @@
 			<mtd>
 				<mn
 					>{round(
-						((mult - multLow) / (multHigh - multLow)) ** (1 / exp) *
+						((mult - multMin) / (multMax - multMin)) ** (1 / exp) *
 							100,
 						100,
 					)}%</mn
