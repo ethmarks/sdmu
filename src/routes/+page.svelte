@@ -11,7 +11,7 @@
 	import FormulaSteps from "$lib/FormulaSteps.svelte";
 
 	const DECIMALS_FOR_PERCENTILE = 2;
-	const DECIMALS_FOR_MULT = 4;
+	const DECIMALS_FOR_MULT = 2;
 
 	let percentile: number = $state(50);
 	let mult: number = $state(6.67);

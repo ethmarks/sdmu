@@ -28,7 +28,7 @@
 			onchange={() => updatePercentile(percentile)}
 			min="0"
 			max="100"
-			step="0.1"
+			step="0.01"
 		/>
 		<label for="percentile">%</label>
 	</span>

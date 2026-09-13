@@ -12,7 +12,7 @@
 	let { percentile, mult, minMult, maxMult, exponent, modifier }: Props =
 		$props();
 
-	function round(num: number, pad: number = 10000): number {
+	function round(num: number, pad: number = 100): number {
 		return Math.round(num * pad) / pad;
 	}
 </script>
