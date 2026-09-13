@@ -1,5 +1,6 @@
-const DEFAULT_MIN_MULT = 1;
-const DEFAULT_MAX_MULT = 20;
+export const DEFAULT_MIN_MULT = 1;
+export const DEFAULT_MAX_MULT = 20;
+export const DEFAULT_MODIFIER = 1;
 
 /**
  * I have no idea where this came from. It's just hardcoded into the formula on

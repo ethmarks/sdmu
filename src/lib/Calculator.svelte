@@ -4,9 +4,19 @@
 		mult: number;
 		updatePercentile: (newPercentile: number) => void;
 		updateMult: (newMult: number) => void;
+
+		minMult: number;
+		maxMult: number;
 	}
 
-	let { percentile, mult, updatePercentile, updateMult }: Props = $props();
+	let {
+		percentile,
+		mult,
+		updatePercentile,
+		updateMult,
+		minMult,
+		maxMult,
+	}: Props = $props();
 </script>
 
 <div class="grid">
@@ -18,6 +28,7 @@
 			onchange={() => updatePercentile(percentile)}
 			min="0"
 			max="100"
+			step="0.1"
 		/>
 		<label for="percentile">%</label>
 	</span>
@@ -30,8 +41,8 @@
 			id="mult"
 			bind:value={mult}
 			onchange={() => updateMult(mult)}
-			min="1"
-			max="20"
+			min={minMult}
+			max={maxMult}
 			step="0.01"
 		/>
 		<label for="mult">x mult</label>

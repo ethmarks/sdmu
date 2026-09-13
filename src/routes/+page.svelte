@@ -1,6 +1,13 @@
 <script lang="ts">
 	import Calculator from "$lib/Calculator.svelte";
-	import { percentileToMult, multToPercentile } from "$lib/formula";
+	import {
+		percentileToMult,
+		multToPercentile,
+		DEFAULT_MAGIC_EXPONENT,
+		DEFAULT_MIN_MULT,
+		DEFAULT_MAX_MULT,
+		DEFAULT_MODIFIER,
+	} from "$lib/formula";
 	import FormulaSteps from "$lib/FormulaSteps.svelte";
 
 	const DECIMALS_FOR_PERCENTILE = 2;
@@ -9,17 +16,34 @@
 	let percentile: number = $state(50);
 	let mult: number = $state(6.67);
 
+	let minMult: number = $state(DEFAULT_MIN_MULT);
+	let maxMult: number = $state(DEFAULT_MAX_MULT);
+	let exponent: number = $state(DEFAULT_MAGIC_EXPONENT);
+	let modifier: number = $state(DEFAULT_MODIFIER);
+
 	function updatePercentile(newPercentile: number) {
 		percentile = newPercentile;
 		mult =
-			Math.round(percentileToMult(percentile) * 10 ** DECIMALS_FOR_MULT) /
+			Math.round(
+				percentileToMult(
+					percentile,
+					modifier,
+					minMult,
+					maxMult,
+					exponent,
+				) *
+					10 ** DECIMALS_FOR_MULT,
+			) /
 			10 ** DECIMALS_FOR_MULT;
 	}
 
 	function updateMult(newMult: number) {
 		mult = newMult;
 		percentile =
-			Math.round(multToPercentile(mult) * 10 ** DECIMALS_FOR_PERCENTILE) /
+			Math.round(
+				multToPercentile(mult, modifier, minMult, maxMult, exponent) *
+					10 ** DECIMALS_FOR_PERCENTILE,
+			) /
 			10 ** DECIMALS_FOR_PERCENTILE;
 	}
 
@@ -59,14 +83,28 @@
 		Type a percentile to calculate the exact resulting multiplier, or type a
 		multiplier to calculate the exact required percentile.
 	</p>
-	<Calculator {mult} {percentile} {updateMult} {updatePercentile} />
+	<Calculator
+		{mult}
+		{percentile}
+		{updateMult}
+		{updatePercentile}
+		{minMult}
+		{maxMult}
+	/>
 </section>
 
 <section id="formula">
 	<h2>Formula</h2>
 	<p>Steps to apply the formula.</p>
 	<div>
-		<FormulaSteps {mult} {percentile} />
+		<FormulaSteps
+			{mult}
+			{percentile}
+			{minMult}
+			{maxMult}
+			{exponent}
+			{modifier}
+		/>
 	</div>
 </section>
 

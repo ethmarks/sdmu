@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { DEFAULT_MAGIC_EXPONENT } from "./formula";
-
 	interface Props {
 		percentile: number;
 		mult: number;
+
+		minMult: number;
+		maxMult: number;
+		exponent: number;
+		modifier: number;
 	}
 
-	let { percentile, mult }: Props = $props();
-
-	const multMin = 1;
-	const multMax = 20;
-	const exp = DEFAULT_MAGIC_EXPONENT;
+	let { percentile, mult, minMult, maxMult, exponent, modifier }: Props =
+		$props();
 
 	function round(num: number, pad: number = 10000): number {
 		return Math.round(num * pad) / pad;
@@ -70,16 +70,16 @@
 			</mtd>
 
 			<mtd>
-				<mn>{multMin}</mn>
+				<mn>{minMult}</mn>
 
 				<mo>+</mo>
 
 				<mo>(</mo>
 
-				<mn>{multMax}</mn>
+				<mn>{maxMult}</mn>
 				<mo>-</mo>
 
-				<mn>{multMin}</mn>
+				<mn>{minMult}</mn>
 				<mo>)</mo>
 
 				<msup>
@@ -88,7 +88,7 @@
 						<mn><mark>{percentile}%</mark></mn>
 						<mo>)</mo>
 					</mrow>
-					<mo>{exp}</mo>
+					<mo>{exponent}</mo>
 				</msup>
 			</mtd>
 		</mtr>
@@ -102,11 +102,11 @@
 			</mtd>
 
 			<mtd>
-				<mn>{multMin}</mn>
+				<mn>{minMult}</mn>
 
 				<mo>+</mo>
 
-				<mn>{multMax - multMin}</mn>
+				<mn>{maxMult - minMult}</mn>
 
 				<msup>
 					<mrow>
@@ -114,7 +114,7 @@
 						<mn><mark>{percentile}%</mark></mn>
 						<mo>)</mo>
 					</mrow>
-					<mo>{exp}</mo>
+					<mo>{exponent}</mo>
 				</msup>
 			</mtd>
 		</mtr>
@@ -128,14 +128,14 @@
 			</mtd>
 
 			<mtd>
-				<mn>{multMin}</mn>
+				<mn>{minMult}</mn>
 
 				<mo>+</mo>
 
-				<mn>{multMax - multMin}</mn>
+				<mn>{maxMult - minMult}</mn>
 
 				<mo>(</mo>
-				<mn><mark>{round((percentile / 100) ** exp)}</mark></mn>
+				<mn><mark>{round((percentile / 100) ** exponent)}</mark></mn>
 				<mo>)</mo>
 			</mtd>
 		</mtr>
@@ -149,14 +149,15 @@
 			</mtd>
 
 			<mtd>
-				<mn>{multMin}</mn>
+				<mn>{minMult}</mn>
 
 				<mo>+</mo>
 
 				<mn
 					><mark
 						>{round(
-							(multMax - multMin) * (percentile / 100) ** exp,
+							(maxMult - minMult) *
+								(percentile / 100) ** exponent,
 						)}</mark
 					></mn
 				>
@@ -175,8 +176,9 @@
 				<mn
 					><mark
 						>{round(
-							multMin +
-								(multMax - multMin) * (percentile / 100) ** exp,
+							minMult +
+								(maxMult - minMult) *
+									(percentile / 100) ** exponent,
 						)}</mark
 					></mn
 				>
@@ -245,21 +247,21 @@
 							<mo>(</mo>
 							<mn><mark>{mult}</mark></mn>
 							<mo>-</mo>
-							<mn>{multMin}</mn>
+							<mn>{minMult}</mn>
 							<mo>)</mo>
 						</mrow>
 
 						<mrow>
 							<mo>(</mo>
 
-							<mn>{multMax}</mn>
+							<mn>{maxMult}</mn>
 							<mo>-</mo>
 
-							<mn>{multMin}</mn>
+							<mn>{minMult}</mn>
 							<mo>)</mo>
 						</mrow>
 					</mfrac>
-					<mi>{exp}</mi>
+					<mi>{exponent}</mi>
 				</mroot>
 			</mtd>
 		</mtr>
@@ -275,10 +277,10 @@
 			<mtd>
 				<mroot>
 					<mfrac>
-						<mn><mark>{mult - multMin}</mark></mn>
-						<mn>{multMax - multMin}</mn>
+						<mn><mark>{mult - minMult}</mark></mn>
+						<mn>{maxMult - minMult}</mn>
 					</mfrac>
-					<mi>{exp}</mi>
+					<mi>{exponent}</mi>
 				</mroot>
 			</mtd>
 		</mtr>
@@ -296,11 +298,11 @@
 					<mn
 						><mark
 							>{round(
-								(mult - multMin) / (multMax - multMin),
+								(mult - minMult) / (maxMult - minMult),
 							)}</mark
 						></mn
 					>
-					<mi>{exp}</mi>
+					<mi>{exponent}</mi>
 				</mroot>
 			</mtd>
 		</mtr>
@@ -317,8 +319,8 @@
 				<mn
 					><mark
 						>{round(
-							((mult - multMin) / (multMax - multMin)) **
-								(1 / exp) *
+							((mult - minMult) / (maxMult - minMult)) **
+								(1 / exponent) *
 								100,
 							100,
 						)}%</mark
