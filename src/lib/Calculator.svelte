@@ -49,7 +49,7 @@
 	</span>
 </div>
 
-<style>
+<style lang="scss">
 	.grid {
 		display: grid;
 		grid-template-columns: 1fr max-content 1fr;
@@ -78,6 +78,12 @@
 
 	input {
 		min-width: 15ch;
+
+		&:invalid {
+			--focus: HSL(348, 100%, 50%);
+			--border-muted: HSL(348, 100%, 50%);
+			--focus-background: HSL(348, 100%, 23%);
+		}
 	}
 
 	@media (width <= 768px) {
