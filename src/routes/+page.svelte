@@ -10,6 +10,7 @@
 	} from "$lib/formula";
 	import FormulaSteps from "$lib/FormulaSteps.svelte";
 	import Walkthrough from "$lib/Walkthrough.svelte";
+	import Modifiers from "$lib/Modifiers.svelte";
 
 	const DECIMALS_FOR_PERCENTILE = 2;
 	const DECIMALS_FOR_MULT = 2;
@@ -87,6 +88,20 @@
 		{minMult}
 		{maxMult}
 	/>
+</section>
+
+<section id="modifiers">
+	<h2>Modifiers</h2>
+	<div>
+		<Modifiers
+			setMinMult={(newMinMult: number) => {
+				minMult = newMinMult;
+			}}
+			setMaxMult={(newMaxMult: number) => {
+				maxMult = newMaxMult;
+			}}
+		/>
+	</div>
 </section>
 
 <section id="formula">
