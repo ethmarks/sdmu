@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Calculator from "$lib/Calculator.svelte";
+	import Graph from "$lib/Graph.svelte";
 	import {
 		percentileToMult,
 		multToPercentile,
@@ -64,18 +65,21 @@
 		Drag the point side-to-side to adjust the percentile, and it'll display
 		the multiplier.
 	</p>
+	<Graph
+		{mult}
+		{percentile}
+		{updatePercentile}
+		{minMult}
+		{maxMult}
+		{exponent}
+		{modifier}
+	/>
+
 	<p>
-		<a href="https://www.desmos.com/calculator/ww5xp3gi52"
-			>Source on Desmos</a
+		Or check out <a href="https://www.desmos.com/calculator/ww5xp3gi52"
+			>the original Desmos graph</a
 		> (made by Jonah Crawford)
 	</p>
-	<iframe
-		title="Stardance Multiplier"
-		src="https://www.desmos.com/calculator/jhptzj9o1h?embed"
-		width="100%"
-		height="500"
-		frameborder="0"
-	></iframe>
 </section>
 
 <section id="calc">
@@ -122,13 +126,6 @@
 </section>
 
 <style lang="scss">
-	#graph iframe {
-		display: block;
-		margin-inline: auto;
-		border-radius: 1em;
-		background: white;
-	}
-
 	#formula div {
 		max-width: 100%;
 		overflow-x: auto;
