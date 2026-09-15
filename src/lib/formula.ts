@@ -1,6 +1,5 @@
 export const DEFAULT_MIN_MULT = 1;
 export const DEFAULT_MAX_MULT = 20;
-export const DEFAULT_MODIFIER = 1;
 
 /**
  * I have no idea where this came from. It's just hardcoded into the formula on
@@ -14,9 +13,6 @@ export const DEFAULT_MAGIC_EXPONENT = 1.745427173;
 export function percentileToMult(
 	/** 0-100, NOT 0-1 */
 	percentile: number,
-
-	/** For blessed and cursed modifiers */
-	modifier: number = 1,
 
 	minMult = DEFAULT_MIN_MULT,
 	maxMult = DEFAULT_MAX_MULT,
@@ -34,9 +30,7 @@ export function percentileToMult(
 
 	const deltaMult = maxMult - minMult;
 
-	const raw = minMult + deltaMult * factor;
-
-	return raw * modifier;
+	return minMult + deltaMult * factor;
 }
 
 /**
@@ -45,29 +39,24 @@ export function percentileToMult(
 export function multToPercentile(
 	mult: number,
 
-	/** For blessed and cursed modifiers */
-	modifier: number = 1,
-
 	minMult = DEFAULT_MIN_MULT,
 	maxMult = DEFAULT_MAX_MULT,
 
 	exponent = DEFAULT_MAGIC_EXPONENT,
 ): number {
-	const raw = mult / modifier;
-
-	if (raw > maxMult) {
+	if (mult > maxMult) {
 		throw new Error(
-			`mult must be less than or equal to max mult, but mult was ${raw} and max mult was ${maxMult}`,
+			`mult must be less than or equal to max mult, but mult was ${mult} and max mult was ${maxMult}`,
 		);
 	}
-	if (raw < minMult) {
+	if (mult < minMult) {
 		throw new Error(
-			`mult must be greater than or equal to min mult, but mult was ${raw} and min mult was ${minMult}`,
+			`mult must be greater than or equal to min mult, but mult was ${mult} and min mult was ${minMult}`,
 		);
 	}
 
 	const deltaMult = maxMult - minMult;
-	const factor = (raw - minMult) / deltaMult;
+	const factor = (mult - minMult) / deltaMult;
 
 	const normalizedPercentile = factor ** (1 / exponent);
 

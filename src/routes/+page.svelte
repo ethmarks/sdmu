@@ -7,7 +7,6 @@
 		DEFAULT_MAGIC_EXPONENT,
 		DEFAULT_MIN_MULT,
 		DEFAULT_MAX_MULT,
-		DEFAULT_MODIFIER,
 	} from "$lib/formula";
 	import FormulaSteps from "$lib/FormulaSteps.svelte";
 	import Walkthrough from "$lib/Walkthrough.svelte";
@@ -21,19 +20,12 @@
 	let minMult: number = $state(DEFAULT_MIN_MULT);
 	let maxMult: number = $state(DEFAULT_MAX_MULT);
 	let exponent: number = $state(DEFAULT_MAGIC_EXPONENT);
-	let modifier: number = $state(DEFAULT_MODIFIER);
 
 	function updatePercentile(newPercentile: number) {
 		percentile = newPercentile;
 		mult =
 			Math.round(
-				percentileToMult(
-					percentile,
-					modifier,
-					minMult,
-					maxMult,
-					exponent,
-				) *
+				percentileToMult(percentile, minMult, maxMult, exponent) *
 					10 ** DECIMALS_FOR_MULT,
 			) /
 			10 ** DECIMALS_FOR_MULT;
@@ -43,7 +35,7 @@
 		mult = newMult;
 		percentile =
 			Math.round(
-				multToPercentile(mult, modifier, minMult, maxMult, exponent) *
+				multToPercentile(mult, minMult, maxMult, exponent) *
 					10 ** DECIMALS_FOR_PERCENTILE,
 			) /
 			10 ** DECIMALS_FOR_PERCENTILE;
@@ -72,7 +64,6 @@
 		{minMult}
 		{maxMult}
 		{exponent}
-		{modifier}
 	/>
 
 	<p>
@@ -102,14 +93,7 @@
 	<h2>Formula</h2>
 	<p>Steps to apply the formula.</p>
 	<div>
-		<FormulaSteps
-			{mult}
-			{percentile}
-			{minMult}
-			{maxMult}
-			{exponent}
-			{modifier}
-		/>
+		<FormulaSteps {mult} {percentile} {minMult} {maxMult} {exponent} />
 	</div>
 </section>
 

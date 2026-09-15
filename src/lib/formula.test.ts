@@ -58,14 +58,14 @@ describe("Formula", () => {
 
 			// applying the formula forwards, from percentile -> mult
 			const forwards = (percentile: number) =>
-				percentileToMult(percentile, modifier, minMult, maxMult);
+				percentileToMult(percentile, minMult * modifier, maxMult * modifier);
 			it.each(cases)("%dth percentile should be %dx", (percentile, mult) => {
 				expect(forwards(Number(percentile))).toBeCloseTo(mult, 0.1);
 			});
 
 			// applying the formula backwards, from mult -> percentile
 			const backwards = (mult: number) =>
-				multToPercentile(mult, modifier, minMult, maxMult);
+				multToPercentile(mult, minMult * modifier, maxMult * modifier);
 			it.each(cases.map(([p, m]) => [m, p]))(
 				"%dx mult should be %dth percentile",
 				(mult, percentile) => {

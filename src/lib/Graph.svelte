@@ -8,7 +8,6 @@
 		minMult: number;
 		maxMult: number;
 		exponent: number;
-		modifier: number;
 		yTickCount?: number;
 	}
 
@@ -19,7 +18,6 @@
 		minMult,
 		maxMult,
 		exponent,
-		modifier,
 		yTickCount = 5,
 	}: Props = $props();
 
@@ -34,7 +32,10 @@
 		const count = Math.max(2, Math.floor(yTickCount));
 		const interval = (maxMult - minMult) / (count - 1);
 
-		return Array.from({ length: count }, (_, index) => minMult + index * interval);
+		return Array.from(
+			{ length: count },
+			(_, index) => minMult + index * interval,
+		);
 	}
 
 	function xForPercentile(value: number) {
@@ -49,13 +50,7 @@
 
 	function curvePoints() {
 		return Array.from({ length: 101 }, (_, index) => {
-			const value = percentileToMult(
-				index,
-				modifier,
-				minMult,
-				maxMult,
-				exponent,
-			);
+			const value = percentileToMult(index, minMult, maxMult, exponent);
 			return `${xForPercentile(index)},${yForMult(value)}`;
 		}).join(" ");
 	}

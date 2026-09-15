@@ -6,11 +6,9 @@
 		minMult: number;
 		maxMult: number;
 		exponent: number;
-		modifier: number;
 	}
 
-	let { percentile, mult, minMult, maxMult, exponent, modifier }: Props =
-		$props();
+	let { percentile, mult, minMult, maxMult, exponent }: Props = $props();
 
 	function round(num: number, pad: number = 100): number {
 		return Math.round(num * pad) / pad;
