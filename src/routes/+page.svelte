@@ -9,6 +9,7 @@
 		DEFAULT_MODIFIER,
 	} from "$lib/formula";
 	import FormulaSteps from "$lib/FormulaSteps.svelte";
+	import Walkthrough from "$lib/Walkthrough.svelte";
 
 	const DECIMALS_FOR_PERCENTILE = 2;
 	const DECIMALS_FOR_MULT = 2;
@@ -105,6 +106,18 @@
 			{exponent}
 			{modifier}
 		/>
+	</div>
+</section>
+
+<section id="walkthrough">
+	<h2>Code Walkthrough</h2>
+	<p>
+		Excerpts from the actual <a href="https://github.com/hackclub/stardance"
+			>Stardance source code</a
+		>, annotated with my explanatory comments.
+	</p>
+	<div>
+		<Walkthrough />
 	</div>
 </section>
 
