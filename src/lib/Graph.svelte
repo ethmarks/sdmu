@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Spring } from "svelte/motion";
 	import { percentileToMult } from "$lib/formula";
 
 	interface Props {
@@ -57,6 +58,17 @@
 
 	let svg: SVGSVGElement;
 	let dragging = false;
+	const activeX = new Spring(0, { stiffness: 0.16, damping: 0.8 });
+	const activeY = new Spring(0, { stiffness: 0.16, damping: 0.8 });
+
+	$effect(() => {
+		const nextX = xForPercentile(percentile);
+		const nextY = yForMult(mult);
+		const instant = activeX.target === 0 && activeY.target === 0;
+
+		activeX.set(nextX, { instant });
+		activeY.set(nextY, { instant });
+	});
 
 	function updateFromPointer(event: PointerEvent) {
 		const bounds = svg.getBoundingClientRect();
@@ -166,14 +178,14 @@
 			{/each}
 			<text
 				class="active-tick"
-				x={xForPercentile(percentile)}
+				x={activeX.current}
 				y={plot.top + plotHeight + 24}
 				text-anchor="middle">{percentile}%</text
 			>
 			<text
 				class="active-tick"
 				x={plot.left - 12}
-				y={yForMult(mult) + 5}
+				y={activeY.current + 5}
 				text-anchor="end">{mult.toFixed(2)}x</text
 			>
 			<text
@@ -193,8 +205,8 @@
 
 		<line
 			class="active-line"
-			x1={xForPercentile(percentile)}
-			x2={xForPercentile(percentile)}
+			x1={activeX.current}
+			x2={activeX.current}
 			y1={plot.top}
 			y2={plot.top + plotHeight}
 			aria-hidden="true"
@@ -203,14 +215,14 @@
 			class="active-line"
 			x1={plot.left}
 			x2={plot.left + plotWidth}
-			y1={yForMult(mult)}
-			y2={yForMult(mult)}
+			y1={activeY.current}
+			y2={activeY.current}
 			aria-hidden="true"
 		/>
 		<circle
 			class="point"
-			cx={xForPercentile(percentile)}
-			cy={yForMult(mult)}
+			cx={activeX.current}
+			cy={activeY.current}
 			r="9"
 			tabindex="0"
 			role="slider"
@@ -224,15 +236,15 @@
 		/>
 		<circle
 			class="point point-visible"
-			cx={xForPercentile(percentile)}
-			cy={yForMult(mult)}
+			cx={activeX.current}
+			cy={activeY.current}
 			r="9"
 			aria-hidden="true"
 		/>
 		<text
 			class="value-label"
-			x={xForPercentile(percentile)}
-			y={yForMult(mult) - 18}
+			x={activeX.current}
+			y={activeY.current - 18}
 			text-anchor="middle">{percentile}% = {mult}x</text
 		>
 	</svg>

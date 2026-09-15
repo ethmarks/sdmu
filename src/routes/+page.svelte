@@ -42,6 +42,15 @@
 			10 ** DECIMALS_FOR_PERCENTILE;
 	}
 
+	$effect(() => {
+		mult =
+			Math.round(
+				percentileToMult(percentile, minMult, maxMult, exponent) *
+					10 ** DECIMALS_FOR_MULT,
+			) /
+			10 ** DECIMALS_FOR_MULT;
+	});
+
 	updatePercentile(50);
 </script>
 
