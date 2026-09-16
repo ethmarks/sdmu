@@ -319,6 +319,10 @@
 		font-size: 14px;
 	}
 
+	.value-label {
+		text-shadow: black 0 0 2px;
+	}
+
 	.axis-title {
 		fill: var(--text-main);
 		font-size: 15px;
