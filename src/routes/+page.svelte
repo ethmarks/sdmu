@@ -11,6 +11,7 @@
 	import FormulaSteps from "$lib/FormulaSteps.svelte";
 	import Walkthrough from "$lib/Walkthrough.svelte";
 	import Modifiers from "$lib/Modifiers.svelte";
+	import Hours from "$lib/Hours.svelte";
 
 	const DECIMALS_FOR_PERCENTILE = 2;
 	const DECIMALS_FOR_MULT = 2;
@@ -111,6 +112,16 @@
 			}}
 		/>
 	</div>
+</section>
+
+<section id="hours">
+	<h2>Hours Calculator</h2>
+	<p>
+		Type in an hour count and a mukt to calculate how much Stardust you'll
+		earn. You can also type a Stardust amount and a mult to calculate how
+		many hours you'll need.
+	</p>
+	<Hours {mult} {updateMult} {minMult} {maxMult} />
 </section>
 
 <section id="formula">

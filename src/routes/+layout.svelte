@@ -16,6 +16,7 @@
 		<a href="#graph">Graph</a>
 		<a href="#calc">Calculator</a>
 		<a href="#modifiers">Modifiers</a>
+		<a href="#hours">Hours</a>
 		<a href="#formula">Formula</a>
 		<a href="#walkthrough">Walkthrough</a>
 		<a href="https://github.com/ethmarks/sdmu">Source</a>
