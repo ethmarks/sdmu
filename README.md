@@ -18,7 +18,7 @@ Just visit <https://ethmarks.github.io/sdmu/>
 - **Exact formula reimplementation**: [`formula.ts`](./src/lib/formula.ts) is
   logically identical to
   [the official implementation](https://github.com/hackclub/stardance/blob/main/app/models/post/ship_event/payouts.rb),
-  and I have [a test suite](./src/lib/formula.ts) to verify correctness.
+  and I have [a test suite](./src/lib/formula.test.ts) to verify correctness.
 - **Formula steps**: each step of the formula is rendered in mathematical
   notation using [MathML](https://developer.mozilla.org/en-US/docs/Web/MathML),
   to make the formula more understandable.
@@ -51,18 +51,16 @@ already.
 
 ```sh
 git clone https://github.com/ethmarks/sdmu.git
-cd nolet
+cd sdmu
 pnpm install
 pnpm dev
 ```
 
 ## AI Usage
 
-[`Graph.svelte`](src/lib/Graph.svelte) (the interactive graph component) was
-almost completely vibe-coded using AI.
-
-However, this is the _only_ part of the codebase that was touched by AI in any
-way. Everything else was made 100% by me.
+- I used AI extensively in the [`Graph.svelte`](src/lib/Graph.svelte) (the
+  interactive graph component)
+- everything else was made 100% by me
 
 ## License
 
