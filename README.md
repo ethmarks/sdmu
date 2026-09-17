@@ -7,7 +7,7 @@ Tools to visualize and explore the formula that
 [Stardance](https://stardance.hackclub.com/) uses to calculate project
 multipliers.
 
-[![screenshot of SDMU](./.github/hero.png)](https://ethmarks.github.io/sdmu)
+[![screenshot of SDMU](./.github/hero2.png)](https://ethmarks.github.io/sdmu)
 
 ## Quickstart
 
@@ -28,7 +28,7 @@ Just visit <https://ethmarks.github.io/sdmu/>
   explanations and highlighted with [Nueglow](https://nuejs.org/docs/nueglow)
   for readability.
 
-![screenshot of the Formula tool of SDMU](./.github/formula.png)
+![screenshot of the Formula tool of SDMU](./.github/formula2.png)
 
 ## Acknowledgements
 
