@@ -7,7 +7,7 @@ Tools to visualize and explore the formula that
 [Stardance](https://stardance.hackclub.com/) uses to calculate project
 multipliers.
 
-[![screenshot of SDMU](./.github/screenshot.png)](https://ethmarks.github.io/sdmu)
+[![screenshot of SDMU](./.github/hero.png)](https://ethmarks.github.io/sdmu)
 
 ## Quickstart
 
@@ -28,6 +28,8 @@ Just visit <https://ethmarks.github.io/sdmu/>
   explanations and highlighted with [Nueglow](https://nuejs.org/docs/nueglow)
   for readability.
 
+![screenshot of the Formula tool of SDMU](./.github/formula.png)
+
 ## Acknowledgements
 
 - Heavily inspired by
@@ -40,7 +42,27 @@ Just visit <https://ethmarks.github.io/sdmu/>
   site styles
 - Thanks to the [NueJS team](https://github.com/nuejs) for making
   [Nueglow](https://nuejs.org/docs/nueglow), which is used for highlighting the
-  code walkthrough.
+  code walkthrough
+
+## Running Locally
+
+Make sure to [install pnpm](https://pnpm.io/installation) if you haven't
+already.
+
+```sh
+git clone https://github.com/ethmarks/sdmu.git
+cd nolet
+pnpm install
+pnpm dev
+```
+
+## AI Usage
+
+[`Graph.svelte`](src/lib/Graph.svelte) (the interactive graph component) was
+almost completely vibe-coded using AI.
+
+However, this is the _only_ part of the codebase that was touched by AI in any
+way. Everything else was made 100% by me.
 
 ## License
 
