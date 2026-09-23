@@ -1,5 +1,13 @@
 <script lang="ts">
+	import favicon from "$lib/assets/favicon.ico";
+	import screenshot from "$lib/assets/screenshot.png";
+
 	let { children } = $props();
+
+	const title = "Stardance Mult Utility";
+	const desc =
+		"Tools to visualize and explore the formula that Stardance uses to calculate project multipliers.";
+	const url = "https://ethmarks.github.io/sdmu/";
 </script>
 
 <svelte:head>
@@ -7,7 +15,18 @@
 		rel="stylesheet"
 		href="https://cdn.jsdelivr.net/gh/kimeiga/bahunya/dist/bahunya.min.css"
 	/>
-	<title>Stardance Mult Utility</title>
+
+	<title>{title}</title>
+	<meta name="description" content={desc} />
+	<link rel="canonical" href={url} />
+	<link rel="icon" href={favicon} />
+
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={desc} />
+	<meta property="og:url" content={url} />
+	<meta property="og:site_name" content={title} />
+	<meta property="og:image" content={screenshot} />
 </svelte:head>
 
 <header>
