@@ -13,7 +13,7 @@
 <svelte:head>
 	<link
 		rel="stylesheet"
-		href="https://cdn.jsdelivr.net/gh/kimeiga/bahunya/dist/bahunya.min.css"
+		href="https://cdn.jsdelivr.net/gh/kimeiga/bahunya@e75f08eb7014ec888754f9a58afd6210fb6c2507/dist/bahunya.min.css"
 	/>
 
 	<title>{title}</title>
